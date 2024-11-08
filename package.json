@@ -9,7 +9,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "sls:local": "tsc && serverless offline --stage DEV --noPrependStageInUrl --ignoreJWTSignature --noAuth",
+    "sls:local": "npm run build && serverless offline --stage DEV --noPrependStageInUrl --ignoreJWTSignature --noAuth",
     "sls:deploy": "npm run build && serverless deploy --stage DEV",
     "sls:build": "npm run build && serverless deploy --stage PROD",
     "sls:remove": "serverless remove --stage DEV",
