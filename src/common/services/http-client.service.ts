@@ -1,4 +1,3 @@
-// core/services/http-client.service.ts
 import { Injectable, HttpException, Logger } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';

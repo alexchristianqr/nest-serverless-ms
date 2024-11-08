@@ -7,7 +7,7 @@ import { printLogger } from "../../../shared/utils/logs.util";
 import { AuthGuard } from "../../auth/guards/auth.guard";
 
 @Controller("samples")
-@UseGuards(AuthGuard) // Protege esta ruta con el guard de JWT
+// @UseGuards(AuthGuard) // Protege esta ruta con el guard de JWT
 @UseInterceptors(ResponseInterceptor)
 export class SamplesController extends BaseController {
   constructor(private readonly sampleService: SampleService) {
