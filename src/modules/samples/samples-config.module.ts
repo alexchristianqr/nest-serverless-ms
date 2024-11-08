@@ -29,19 +29,19 @@ const NODE_ENV = process.env.NODE_ENV || "development";
 export const samplesConfigModule = {
   imports: [
     HttpModule,
-    TypeOrmModule.forRoot({
-      type: "mysql",
-      host: process.env.DB_HOST || "localhost",
-      port: parseInt(process.env.DB_PORT, 10) || 3306,
-      username: process.env.DB_USERNAME || "root",
-      password: process.env.DB_PASSWORD || "",
-      database: process.env.DB_NAME || "db_samples",
-      entities: entities,
-      synchronize: NODE_ENV === "development", // No usar en producción, preferir migraciones
-      autoLoadEntities: true, // Carga las entidades automáticamente
-      logging: NODE_ENV === "development" ? TYPE_LOGGING : false // Habilita la impresión de queries
-    }),
-    TypeOrmModule.forFeature([SampleOrmEntity])
+    // TypeOrmModule.forRoot({
+    //   type: "mysql",
+    //   host: process.env.DB_HOST || "localhost",
+    //   port: parseInt(process.env.DB_PORT, 10) || 3306,
+    //   username: process.env.DB_USERNAME || "root",
+    //   password: process.env.DB_PASSWORD || "",
+    //   database: process.env.DB_NAME || "db_samples",
+    //   entities: entities,
+    //   synchronize: NODE_ENV === "development", // No usar en producción, preferir migraciones
+    //   autoLoadEntities: true, // Carga las entidades automáticamente
+    //   logging: NODE_ENV === "development" ? TYPE_LOGGING : false // Habilita la impresión de queries
+    // }),
+    // TypeOrmModule.forFeature([SampleOrmEntity])
   ],
   controllers: [SamplesController],
   providers: [
