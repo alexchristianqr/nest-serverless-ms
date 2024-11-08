@@ -1,2 +1,3 @@
-import { bootstrap } from "./common/core";
+import { bootstrap } from "./core/bootstrap";
+
 bootstrap();

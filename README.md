@@ -3,10 +3,15 @@
 Plantilla con arquitectura hexagonal para desplegar una aplicación NestJS en AWS Lambda con Serverless Framework. (
 NestJS v10 + Serverless v3 + AWS)
 
+## Stacks
+- Node.js v18+
+- Serverless Framework v3
+- AWS CLI v2
+
 ## Instalación
 
 ```bash
-npm install # Instalar dependencias 
+npm install # Instalar dependencias
 ```
 
 ## Configurar archivo .env
@@ -26,7 +31,7 @@ npm run sls:debug # Iniciar aplicación Serverless en modo local con debug
 npm run sls:remove # Eliminar aplicación Serverless en modo local
 ```
 
-### Configurar AWS
+### Configurar AWS CLI
 
 ```bash
 # aws_cli_profile = "perfil_01"
@@ -64,33 +69,61 @@ npm run sls:remove # Eliminar aplicación en AWS
 ## Arquitectura Modular NestJS
 
 ```bash
-my-app/ 
-├── src/ 
-├──── common/ # Carpeta común
-├──── modules/ # Carpeta de módulos
-├────── samples/ # Carpeta de muestra
-├──────── samples.module.ts # Archivo de módulo de muestra
-├──────── middlewares/ # Carpeta de middlewares
-├──────── guards/ # Carpeta de guards
-├──────── controllers/ # Carpeta de controladores
-├────────── samples.controller.ts # Archivo de controlador de muestra
-├──────── dtos/ # Carpeta DTOs (Data Transfer Objects)
-├────────── sample.dto.ts # Archivo DTO de creación de muestra
-├──────── serverless/ # Carpeta de configuración de serverless
-├────────── events.yaml # Archivo de eventos de serverless
-├────────── lambda.ts # Archivo de lambda handler
-├──────── services/ # Carpeta de casos de uso
-├────────── sample.service.ts # Archivo de caso de uso de muestra
-├──────── entities/ # Carpeta de entidades
-├────────── sample.entity.ts # Archivo de entidad de muestra
-├──────── ports/ # Carpeta de puertos
-├────────── input/ # Carpetas de entrada de puertos
-├──────────── sample-input.usecase.ts # Archivo de entrada de caso de uso de muestra
-├────────── output/ # Carpeta de salida de puertos
-├──────────── sample-interface.repository.ts # Archivo de salida de repositorio de muestra
-├──────── database/ # Carpeta de base de datos
-├────────── repositories/ # Carpeta de repositorios
-├──────────── sample.repository.ts # Archivo de repositorio de muestra
+/src
+├── modules # Carpeta de módulos
+├──── samples # Carpeta de muestra
+├────── samples.module.ts # Archivo de módulo de muestra
+├────── middlewares # Carpeta de middlewares
+├────── guards # Carpeta de guards
+├────── controllers # Carpeta de controladores
+├──────── samples.controller.ts # Archivo de controlador de muestra
+├────── dtos # Carpeta DTOs (Data Transfer Objects)
+├──────── sample.dto.ts # Archivo DTO de creación de muestra
+├────── serverless # Carpeta de configuración de serverless
+├──────── events.yaml # Archivo de eventos de serverless
+├──────── lambda.ts # Archivo de lambda handler
+├────── services # Carpeta de casos de uso
+├──────── sample.service.ts # Archivo de caso de uso de muestra
+├────── entities # Carpeta de entidades
+├──────── sample.entity.ts # Archivo de entidad de muestra
+├────── repositories/ # Carpeta de repositorios
+├──────── sample-interface.repository.ts # Archivo de salida de repositorio de muestra
+└──────── sample.repository.ts # Archivo de repositorio de muestra
+
+--
+
+/src/core # Configuración y servicios esenciales
+├── config # Configuración de la aplicación
+└── bootstrap.ts # Inicialización de la aplicación
+
+--
+
+/src/common # Recursos comunes
+├── guards # Guards reutilizables
+├── interceptors # Interceptores comunes
+├── middlewares # Middlewares de propósito general
+├── services # Servicios base o abstractos
+├── decorators # Decoradores personalizados
+├── exception-filters # Filtros personalizados
+└── common.module.ts # Módulo común global
+
+--
+ 
+/src/shared # Recursos compartidos
+├── dto # DTOs de propósito general
+├── interfaces # Interfaces de propósito general
+├── pipes # Pipes de validación
+├── exception-filters # Filtros genéricos
+├── constants # Constantes de propósito general
+└── utils # Utilidades de propósito general
+```
+
+## Diferencias entre core, shared y common
+
+```text
+core: Necesario cuando tienes elementos críticos y globales que afectan la infraestructura de la aplicación. Colocar estos elementos en core ayuda a separar la configuración y lógica de infraestructura esencial, manteniendo common y shared limpios y específicos a su propósito.
+common: Se enfoca en componentes reutilizables de propósito general con algo de lógica, como guards, interceptores, decoradores y servicios base.
+shared: Ideal para recursos estáticos y reutilizables que no tienen lógica de negocio, como DTOs, interfaces, utilidades y constantes.
 ```
 
 ### Diagrama

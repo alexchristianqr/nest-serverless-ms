@@ -1,12 +1,12 @@
 import * as dotenv from "dotenv";
 import { INestApplication, ValidationPipe } from "@nestjs/common";
-import { ResponseErrorExceptionFilter } from "../exception-filters/response-error.exception-filter";
+import { ResponseErrorExceptionFilter } from "../../common/exception-filters/response-error.exception-filter";
 import { NestFactory } from "@nestjs/core";
 import serverless from "serverless-http";
 import { AppModule } from "../../app.module";
 import { Handler } from "aws-lambda";
-import { isProduction, isServerlessApp, host, port, protocol } from "../utils/environments.util";
-import { printLoggerError } from "../utils/logs.util";
+import { isProduction, isServerlessApp, host, port, protocol } from "../../shared/utils/environments.util";
+import { printLoggerError } from "../../shared/utils/logs.util";
 
 dotenv.config();
 

@@ -3,11 +3,11 @@ import { SampleService } from "../services/sample.service";
 import { SampleDto } from "../dtos/sample.dto";
 import { BaseController } from "../../../common/controllers/base.controller";
 import { ResponseInterceptor } from "../../../common/interceptors/response.interceptor";
-import { printLogger } from "../../../common/utils/logs.util";
-import { AuthGuard } from "../../../common/guards/auth.guard";
+import { printLogger } from "../../../shared/utils/logs.util";
+import { AuthGuard } from "../../auth/guards/auth.guard";
 
 @Controller("samples")
-// @UseGuards(AuthGuard) // Protege esta ruta con el guard de JWT
+@UseGuards(AuthGuard) // Protege esta ruta con el guard de JWT
 @UseInterceptors(ResponseInterceptor)
 export class SamplesController extends BaseController {
   constructor(private readonly sampleService: SampleService) {

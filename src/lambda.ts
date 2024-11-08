@@ -1,6 +1,7 @@
 import { Handler, Context, Callback, APIGatewayEvent } from "aws-lambda";
 import { AppModule } from "./app.module";
-import { bootstrap } from "./common/core";
+import { bootstrap } from "./core/bootstrap";
+import { SamplesModule } from "./modules/samples/samples.module";
 
 let server: Handler;
 
