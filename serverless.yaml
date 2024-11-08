@@ -23,5 +23,9 @@ provider:
             - "lambda:*"
           Resource: "*"
 
+package:
+  exclude:
+    - node_modules/**
+
 functions:
   - ${file(src/modules/samples/serverless/events.yaml)}
