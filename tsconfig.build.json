@@ -1,5 +1,13 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist", "build", "**/*.spec.ts"]
+  "compilerOptions": {
+    "sourceMap": false, // No generar mapas de fuente en producción
+    "declaration": true, // Mantener las declaraciones para usar en bibliotecas
+    "removeComments": true, // Remover comentarios para un código más limpio
+    "incremental": false, // Desactivar incremental para un build más limpio
+    "skipLibCheck": true, // Ignorar verificación de archivos de tipo
+    "outDir": "./dist" // Asegurarse de compilar en la carpeta correcta
+  },
+  "include": ["src/**/*.ts"], // Solo incluir archivos fuente
+  "exclude": ["node_modules", "test", "**/*.spec.ts", "**/*.test.ts"] // Excluir pruebas y dependencias
 }
