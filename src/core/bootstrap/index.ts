@@ -38,12 +38,10 @@ const useGlobalFilters = (app: INestApplication): void => {
 };
 
 // Configura los middlewares globales
-/*
-  const useMiddlewares = (app: INestApplication): void => {
-    const loggingMiddleware = new LoggingMiddleware();
-    app.use(loggingMiddleware.use.bind(loggingMiddleware));
-  };
-*/
+const useMiddlewares = (app: INestApplication): void => {
+  // const loggingMiddleware = new LoggingMiddleware();
+  // app.use(loggingMiddleware.use.bind(loggingMiddleware));
+};
 
 // Función que inicializa la aplicación y devuelve el servidor
 export const bootstrap = async (module?: any, callback?: Function): Promise<any> => {
@@ -52,8 +50,8 @@ export const bootstrap = async (module?: any, callback?: Function): Promise<any>
 
   useLogger(app); // Configura el logger
   useGlobalFilters(app); // Configura los filtros de excepción
-  // useGlobalPipes(app); // Configura los pipes de validación
-  // useMiddlewares(app); // Configura los middlewares
+  useGlobalPipes(app); // Configura los pipes de validación
+  useMiddlewares(app); // Configura los middlewares
 
   // Si es una aplicación serverless, inicializa la aplicación y devuelve el servidor
   if (isServerlessApp() && callback) {
