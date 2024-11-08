@@ -2,6 +2,7 @@ service: SLS-TEMPLATE
 
 plugins:
   - serverless-offline
+  - serverless-webpack
 
 frameworkVersion: "3"
 
@@ -23,9 +24,17 @@ provider:
             - "lambda:*"
           Resource: "*"
 
+custom:
+  webpack:
+    includeModules: true
+
 package:
   exclude:
-    - node_modules/**
+    - webpack.js # Excluye el directorio de webpack
+  include:
+    - node_modules/** # Incluye el directorio de módulos
+    - dist/** # Incluye el directorio de distribución
+    - .env # Incluye el archivo de variables de entorno
 
 functions:
   - ${file(src/modules/samples/serverless/events.yaml)}
