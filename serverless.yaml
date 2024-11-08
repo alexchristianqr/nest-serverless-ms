@@ -1,0 +1,27 @@
+service: SLS-TEMPLATE
+
+plugins:
+  - serverless-offline
+
+frameworkVersion: "3"
+
+useDotenv: true
+
+provider:
+  # GENERAL
+  name: aws
+  runtime: ${env:AWS_RUNTIME}
+  stage: ${opt:stage, 'DEV'}
+  region: ${env:AWS_REGION}
+  timeout: ${env:SLS_TIMEOUT} # Por defecto es 30 segundos, establecer a 300 seg para un correcto debug
+  # IAM
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "lambda:*"
+          Resource: "*"
+
+functions:
+  - ${file(src/modules/samples/serverless/events.yaml)}

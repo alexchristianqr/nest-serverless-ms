@@ -1,0 +1,29 @@
+SAMPLES_MODULE_LF:
+  memorySize: 128 # Por defecto es 128 MB, para optimizar el lambda cambiar hasta 512 MB
+  handler: "dist/src/lambda.handler"
+  description: "Lambda function para el modulo de samples"
+  events:
+    - http:
+        path: "samples"
+        method: get
+        cors: true
+    - http:
+        path: "samples/{id}"
+        method: get
+        cors: true
+    - http:
+        path: "samples"
+        method: post
+        cors: true
+    - http:
+        path: "samples/{id}"
+        method: put
+        cors: true
+#    - http:
+#        path: "samples/{id}"
+#        method: patch
+#        cors: true
+    - http:
+        path: "samples/{id}"
+        method: delete
+        cors: true
