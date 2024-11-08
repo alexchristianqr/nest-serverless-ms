@@ -10,7 +10,7 @@ import { AuthGuard } from "../../../common/guards/auth.guard";
 // @UseGuards(AuthGuard) // Protege esta ruta con el guard de JWT
 @UseInterceptors(ResponseInterceptor)
 export class SamplesController extends BaseController {
-  constructor(private readonly sampleUsecase: SampleService) {
+  constructor(private readonly sampleService: SampleService) {
     super();
   }
 
@@ -18,14 +18,14 @@ export class SamplesController extends BaseController {
   async getAllSamples() {
     printLogger(`[${this.constructor.name}.getAllSamples]`);
 
-    return this.sampleUsecase.getSamples();
+    return this.sampleService.getSamples();
   }
 
   @Get(":id")
   async getSampleById(@Param("id") id: number) {
     printLogger(`[${this.constructor.name}.getSampleById]`, { id });
 
-    const sample = await this.sampleUsecase.getSampleById(id);
+    const sample = await this.sampleService.getSampleById(id);
     if (!sample) {
       throw new NotFoundException(`Sample with ID ${id} not found`);
     }
@@ -36,20 +36,20 @@ export class SamplesController extends BaseController {
   async createSample(@Body() createSampleDto: SampleDto) {
     printLogger(`[${this.constructor.name}.createSample]`, { createSampleDto });
 
-    return await this.sampleUsecase.createSample(createSampleDto);
+    return await this.sampleService.createSample(createSampleDto);
   }
 
   @Put(":id")
   async updateSample(@Param("id") id: number, @Body() createSampleDto: SampleDto) {
     printLogger(`[${this.constructor.name}.updateSample]`, { id, createSampleDto });
 
-    return await this.sampleUsecase.updateSample(id, createSampleDto);
+    return await this.sampleService.updateSample(id, createSampleDto);
   }
 
   @Delete(":id")
   async deleteSample(@Param("id") id: number) {
     printLogger(`[${this.constructor.name}.deleteSample]`, { id });
 
-    return await this.sampleUsecase.deleteSample(id);
+    return await this.sampleService.deleteSample(id);
   }
 }
