@@ -3,7 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
-  entry: './dist/lambda.js', // Archivo principal dentro de la carpeta dist
+  entry: './dist/main.js', // Archivo principal dentro de la carpeta dist
   target: 'node', // Para aplicaciones Node.js
   externals: [nodeExternals()], // Excluye node_modules del bundle
   mode: 'production',
