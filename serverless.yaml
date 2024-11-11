@@ -27,10 +27,12 @@ provider:
 custom:
   webpack:
     includeModules: true
+  serverless-offline:
+    useChildProcesses: true
+    useWorkerThreads: false
 
 package:
-  exclude:
-    - webpack.js # Excluye el directorio de webpack
+  excludeDevDependencies: false
   include:
     - node_modules/** # Incluye el directorio de módulos
     - dist/** # Incluye el directorio de distribución
