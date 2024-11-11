@@ -12,7 +12,7 @@ provider:
   # GENERAL
   name: aws
   runtime: ${env:AWS_RUNTIME}
-  stage: ${opt:stage, 'DEV'}
+  stage: ${opt:stage}
   region: ${env:AWS_REGION}
   timeout: ${env:SLS_TIMEOUT} # Por defecto es 30 segundos, establecer a 300 seg para un correcto debug
   # IAM
